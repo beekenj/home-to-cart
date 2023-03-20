@@ -41,7 +41,6 @@ function App() {
 
   return (
     <div className="App">
-      OK
       {/* <button id="add-button">Add to cart</button> */}
       {list.map(item => <ListItem key={item[0]} itemName={item[1]} />)}
     </div>
