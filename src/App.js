@@ -1,7 +1,12 @@
 // import logo from './logo.svg';
 import { useState, useEffect } from 'react';
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, onValue, } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { initializeApp } from "firebase/app"
+import { getDatabase, ref, onValue, } from "firebase/database"
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+// import { getDatabase, ref, onValue, } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+
+// import("https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js").then(module => { initializeApp })
+// import("https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js").then(module => { getDatabase, ref, onValue, })
 
 import ListItem from './components/ListItem';
 import './App.css';
@@ -36,6 +41,7 @@ function App() {
 
   return (
     <div className="App">
+      OK
       {/* <button id="add-button">Add to cart</button> */}
       {list.map(item => <ListItem key={item[0]} itemName={item[1]} />)}
     </div>
