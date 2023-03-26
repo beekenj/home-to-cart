@@ -23,7 +23,7 @@ html, body {
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .addButton {
@@ -31,14 +31,32 @@ html, body {
     background-color: #AC485A;
     border: 0;
     padding: 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+  }
+
+  .addButton:hover {
+      background-color: #432000;
+      cursor: pointer;
+  }
+
+.addSelect {
+    color: #FDFDFD;
+    background-color: #8a8a8a;
+    border: 0;
+    padding: 15px;
+    margin: 5px 0;
     border-radius: 8px;
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
 }
 
-.addButton:hover {
-    background-color: #432000;
+.addSelect:hover {
+    background-color: #474747;
     cursor: pointer;
 }
 
@@ -56,7 +74,8 @@ html, body {
     border: none;
     color: white;
     padding: 15px 30px;
-    width: 33.3333333%;
+    width: 33.333333333%;
+    /* width: 25%; */
     height: 100%;
     text-align: center;
     text-decoration: none;
@@ -81,27 +100,45 @@ html, body {
     border: none;
     color: white;
     padding: 15px 30px;
-    width: 33.333333%;
+    width: 30%;
     height: 100%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    /* float: left; */
   }
-  
-/* .btn-group .button:hover {
-background-color: #3e8e41;
-} */
+
+.mod-group .select {
+    background-color: #777777; /* Gray */
+    border: none;
+    color: white;
+    padding: 15px 5px;
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    /* background: transparent; */
+    -webkit-appearance: none;
+    appearance: none;
+  }
 
 .navbar-group {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
     top: 0px;
     /* max-width: 320px; */
     width: 100%;
     background-color: #411342; /* Purple */
     height: 47px;
+}
+
+.navbar-search {
+  display: flex;
 }
 
 .navbar-group .button {
@@ -110,7 +147,7 @@ background-color: #3e8e41;
     color: white;
     padding: 15px 15px;
     /* width: 33.3333333%; */
-    height: 95%;
+    height: 100%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -118,6 +155,42 @@ background-color: #3e8e41;
     cursor: pointer;
     /* float: left; */
     text-align: left;
+  }
+
+.navbar-group .select-home {
+    background-color: #411342; /* Purple */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    height: 100%;
+    width: 120px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    /* background: transparent; */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+.navbar-group .select-store {
+    background-color: #411342; /* Purple */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    height: 100%;
+    width: 160px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    /* background: transparent; */
+    -webkit-appearance: none;
+    appearance: none;
   }
   
   .navbar-group .button:hover {
@@ -143,5 +216,5 @@ background-color: #3e8e41;
   /* When the input field gets focus, change its width to 100% */
   .searchbar:focus {
     /* width: 92.5%; */
-    width: 80%;
+    width: 70%;
   }
