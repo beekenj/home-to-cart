@@ -79,6 +79,10 @@ function App() {
   function addClick() {
     let inputFieldEl = document.getElementById("input-field")
     let inputValue = inputFieldEl.value
+    if (!inputValue) {
+      alert("Please give item a name!")
+      return
+    }
     let newEntry = {name:inputValue, inCart:true, homeLoc:newSelectedLoc}
     push(shoppingListInDB, newEntry)
     inputFieldEl.value = ""
@@ -175,7 +179,8 @@ function App() {
 
   // delete
   function deleteItem(id) {
-    if (window.confirm("Delete Item?")) {
+    if (!id) return
+    if (window.confirm("Remove Item?")) {
       let exactLocationOfItemDB = ref(database, `homeToCart/${id}`)
         
       remove(exactLocationOfItemDB)

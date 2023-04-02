@@ -18,6 +18,7 @@ export default function CartItem(props) {
                     id={props.id}
                     // item = {props.item}
                 />
+                <span className="checkmark" />
             </div>
             <div className="itemName">
                 {itemName.length < MAXLENGTH ? 
@@ -25,7 +26,7 @@ export default function CartItem(props) {
                     itemName.slice(0,MAXLENGTH) + "..."
                 }
             </div>
-            <div className="clickArea" onClick={() => props.menuClick(props.id)}>
+            <div className="menuArea" onClick={() => props.menuClick(props.id)}>
                 <FontAwesomeIcon icon={faEllipsisV} />
             </div>
         </div>

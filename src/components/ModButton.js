@@ -11,7 +11,7 @@ export default function NavButton(props) {
     return (
         <button
             className="button"
-            onClick={() => props.handleClick(props.selectedItem)}
+            onClick={() => props.handleClick(props.selectedItemId)}
             style={{color:props.section === props.sectionSelect ? '#a2f3fc' : 'white'}}
         >
             <FontAwesomeIcon icon={iconObj[props.section]} />

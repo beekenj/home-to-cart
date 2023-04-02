@@ -10,23 +10,23 @@ export default function HomeItem(props) {
     // console.log(typeof(itemInCart))
     return (
         <div className="container" style={{background: props.selected && "lightgray"}}>
-            <div className="clickArea">
+            <label className="clickArea">
                 <input 
                     type="checkbox" 
                     checked={itemInCart}
                     value={itemInCart}
                     onChange={props.handleChange}
                     id={props.id}
-                    // item = {props.item}
                 />
-            </div>
+                <span className="checkmark" />
+            </label>
             <div className="itemName">
                 {itemName.length < MAXLENGTH ? 
                     itemName :
                     itemName.slice(0,MAXLENGTH) + "..."
                 }
             </div>
-            <div className="clickArea" onClick={() => props.menuClick(props.id)}>
+            <div className="menuArea" onClick={() => props.menuClick(props.id)}>
                 <FontAwesomeIcon icon={faEllipsisV} />
             </div>
         </div>
