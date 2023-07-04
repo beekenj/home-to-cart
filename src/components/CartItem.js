@@ -6,20 +6,19 @@ export default function CartItem(props) {
     const MAXLENGTH = 25
     const itemName = props.item["name"]
     const itemInCart = props.item["inCart"]
-    // console.log(typeof(itemInCart))
+    // console.log(props.item)
     return (
-        <div className="container" style={{background: props.selected && "lightgray"}}>
-            <div className="clickArea">
+        <div className="container" style={{background: props.selected && "lightgray" || props.item.homeLoc === "Veggies" && "#c5fcd2"}}>
+            <label className="clickArea">
                 <input 
                     type="checkbox" 
                     checked={!itemInCart}
                     value={itemInCart}
                     onChange={props.handleChange}
                     id={props.id}
-                    // item = {props.item}
                 />
                 <span className="checkmark" />
-            </div>
+            </label>
             <div className="itemName">
                 {itemName.length < MAXLENGTH ? 
                     itemName :
