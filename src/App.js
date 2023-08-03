@@ -22,6 +22,7 @@ const shoppingListInDB = ref(database, "homeToCart")
 
 
 let then = Date.now()
+
 // let count = 1
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
   const [selectedStore, setSelectedStore] = useState("Gunberrel Kings")
   // const [selectedStore, setSelectedStore] = useState("Playground")
   const [count, setCount] = useState(1)
+  // console.log(list.filter(item => item[1].inCart))
 
   
   useEffect(() => {
@@ -352,6 +354,11 @@ function App() {
       {/* Top bar */}
       <div className="navbar-group">
         <div className='navbar-search'>
+          {sectionSelect === "Cart" &&
+            <button className="button">
+              {list.filter(item => item[1].inCart).length}
+            </button>
+          }
           {/* Search bar  */}
           {sectionSelect === "Home" &&
             <input 
@@ -392,15 +399,18 @@ function App() {
 
           {/* Store select */}
           {sectionSelect === "Cart" &&
+            <>
+            
             <select 
               className='select-store'
               id="homeLocSelect"
               value={selectedStore}
               onChange={handleChangeStoreSelect}
-              name="homeLocSelect"
-            >
+              name="storeLocSelect"
+              >
               {stores.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
             </select>
+            </>
           }
         </div>
       </div>
