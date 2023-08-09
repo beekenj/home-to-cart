@@ -434,6 +434,26 @@ function App() {
             <option value={obj[selectedItemId].homeLoc}>{obj[selectedItemId].homeLoc}</option>
             {homeLocations.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
           </select>
+          {/* <select>
+            <option value="hi">Hi</option>
+            <option value="bye">Bye</option>
+          </select> */}
+          {/* <select 
+            className='select'
+            id="homeLoc1"
+            value={obj[selectedItemId].homeLoc}
+            onChange={handleChangeHomeLoc}
+            name="homeLoc1"
+          >
+            <option value={obj[selectedItemId].homeLoc}>{obj[selectedItemId].homeLoc}</option>
+            {homeLocations.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
+          </select> */}
+          <ModButton 
+            section={"Color"} 
+            handleClick={() => console.log("change color")} 
+            sectionSelect={sectionSelect}
+            selectedItemId={selectedItemId}
+          />
           <ModButton 
             section={"Delete"} 
             handleClick={deleteItem} 
