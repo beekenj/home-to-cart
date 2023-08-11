@@ -6,6 +6,7 @@ import HomeItem from './components/HomeItem';
 import CartItem from './components/CartItem';
 import NavButton from './components/NavButton';
 import ModButton from './components/ModButton';
+import ColorSelector from './components/ColorSelector';
 import './App.css';
 
 // put this stuff in component!
@@ -472,7 +473,9 @@ function App() {
               handleClick={sectionClick} 
               sectionSelect={sectionSelect}
             />)}
-        </div>}      
+        </div>}
+        {/* need state here... */}
+        {false && <ColorSelector />}
     </>
   );
 }
