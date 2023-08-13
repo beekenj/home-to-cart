@@ -63,6 +63,7 @@ function App() {
   const [selectedStore, setSelectedStore] = useState("Gunberrel Kings")
   // const [selectedStore, setSelectedStore] = useState("Playground")
   const [count, setCount] = useState(1)
+  const [viewColorSelector, setViewColorSelector] = useState(false)
   // console.log(list.filter(item => item[1].inCart))
 
   
@@ -451,7 +452,7 @@ function App() {
           </select> */}
           <ModButton 
             section={"Color"} 
-            handleClick={() => console.log("change color")} 
+            handleClick={() => setViewColorSelector(prev => !prev)} 
             sectionSelect={sectionSelect}
             selectedItemId={selectedItemId}
           />
@@ -475,7 +476,7 @@ function App() {
             />)}
         </div>}
         {/* need state here... */}
-        {false && <ColorSelector />}
+        {viewColorSelector && <ColorSelector />}
     </>
   );
 }
