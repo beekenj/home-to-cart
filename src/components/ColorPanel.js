@@ -10,8 +10,6 @@ export default function ColorPanel(props) {
                 width:"50%",
                 background:props.color
             }
-            }>
-                color
-            </div>
+            } />
     )
 }
