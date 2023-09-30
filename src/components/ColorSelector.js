@@ -1,7 +1,16 @@
 import "./ColorSelector.css"
 import ColorPanel from "./ColorPanel"
 
-const colors = ["#acfcfc", "#78a4eb", "#c5fcd2", "#ffbafe", "#fafaa7"]
+const colors = [
+        "#ffffff", 
+        "#c5fcd2", 
+        "#acfcfc", 
+        "#78a4eb", 
+        "#e5cafa",
+        "#ffbafe", 
+        "#fafaa7", 
+        "#ffe49c",
+    ]
 
 export default function ColorSelector(props) {
     return (
