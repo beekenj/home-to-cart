@@ -179,6 +179,17 @@ function App() {
     }
   }
 
+  // select highlight color
+  function colorClick(color) {
+    const item = obj[selectedItemId]
+    set(ref(database, `homeToCart/${selectedItemId}`), {
+      ...item,
+      "highlightColor" : color
+    })
+    setViewColorSelector(false)
+    setselectedItemId()
+  }
+
   /* ----------------   Mod menu funtions ------------------------*/
 
   // delete
@@ -476,7 +487,7 @@ function App() {
             />)}
         </div>}
         {/* need state here... */}
-        {viewColorSelector && <ColorSelector />}
+        {viewColorSelector && <ColorSelector clickHandle={colorClick} />}
     </>
   );
 }

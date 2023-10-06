@@ -15,7 +15,11 @@ const colors = [
 export default function ColorSelector(props) {
     return (
         <div className="color-selector">
-            {colors.map((color, idx) => <ColorPanel key={idx} color={color} />)}
+            {colors.map((color, idx) => <ColorPanel 
+                key={idx} 
+                color={color} 
+                clickHandle={props.clickHandle}
+            />)}
         </div>
     )
 }

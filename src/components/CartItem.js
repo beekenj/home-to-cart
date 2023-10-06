@@ -9,11 +9,9 @@ export default function CartItem(props) {
     const style = {
         background: 
                 (props.selected && "lightgray") || 
-                (props.item.homeLoc === "Veggies" && "#c5fcd2") ||
-                (props.item.homeLoc === "Refridgerator" && "#acfcfc") ||
-                (itemName === "Propane " && "#fc7168")
+                (!props.item.highlightColor && "white") ||
+                (props.item.highlightColor)
     }
-    // console.log(props.item)
     return (
         <div className="container" style={style} onDragStart={() => console.log("hi")} draggable>
             <label className="clickArea">
