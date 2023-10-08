@@ -6,10 +6,16 @@ export default function HomeItem(props) {
     const MAXLENGTH = 25
     const itemName = props.item["name"]
     const itemInCart = props.item["inCart"]
+    const style = {
+        background: 
+                (props.selected && "lightgray") || 
+                (!props.item.highlightColor && "white") ||
+                (props.item.highlightColor)
+    }
     
     // console.log(typeof(itemInCart))
     return (
-        <div className="container" style={{background: props.selected && "lightgray"}}>
+        <div className="container" style={style}>
             <label className="clickArea">
                 <input 
                     type="checkbox" 

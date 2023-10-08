@@ -486,8 +486,7 @@ function App() {
               sectionSelect={sectionSelect}
             />)}
         </div>}
-        {/* need state here... */}
-        {viewColorSelector && <ColorSelector clickHandle={colorClick} />}
+      {viewColorSelector && <ColorSelector clickHandle={colorClick} />}
     </>
   );
 }
