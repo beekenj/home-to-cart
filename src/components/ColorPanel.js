@@ -7,7 +7,7 @@ export default function ColorPanel(props) {
                 {
                     margin:"10px", 
                     padding:"5px", 
-                    border:"solid", 
+                    border:props.selectedItemColor === props.color ? "solid" : "none", 
                     width:"50%",
                     background:props.color
                 }

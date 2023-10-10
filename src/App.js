@@ -486,7 +486,7 @@ function App() {
               sectionSelect={sectionSelect}
             />)}
         </div>}
-      {viewColorSelector && <ColorSelector clickHandle={colorClick} />}
+      {viewColorSelector && <ColorSelector clickHandle={colorClick} selectedItemColor={obj[selectedItemId].highlightColor} />}
     </>
   );
 }
