@@ -1,14 +1,14 @@
 import "./ColorPanel.css"
 
 export default function ColorPanel(props) {
+    const selectedItemColor = props.selectedItemColor ? props.selectedItemColor : "#ffffff"
     return (
         <div 
             style={
                 {
-                    margin:"10px", 
-                    padding:"5px", 
-                    border:props.selectedItemColor === props.color ? "solid" : "none", 
-                    width:"50%",
+                    margin:"0px", 
+                    padding:"10px", 
+                    border:selectedItemColor === props.color ? "solid" : "none", 
                     background:props.color
                 }
             }
