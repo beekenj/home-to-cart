@@ -20,6 +20,7 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "homeToCart")
+const mealPlanInDB = ref(database, "mealPlan")
 
 
 let then = Date.now()
@@ -65,14 +66,25 @@ function App() {
   const [count, setCount] = useState(1)
   const [viewColorSelector, setViewColorSelector] = useState(false)
   // console.log(list.filter(item => item[1].inCart))
+  const [mealList, setMealList] = useState([])
 
   
   useEffect(() => {
     onValue(shoppingListInDB, function(snapshot) {
       if (snapshot.exists()) {
-        let shoppingListArray = Object.entries(snapshot.val())  
+        let shoppingListArray = Object.entries(snapshot.val())
         setList(shoppingListArray)
         setObj(snapshot.val())
+      } else {
+        alert("Failed to fetch db snapshot")
+      }
+    })
+    onValue(mealPlanInDB, function(snapshot) {
+      if (snapshot.exists()) {
+        console.log(snapshot.val())
+        // let mealListArray = Object.entries(snapshot.val())  
+        // setList(shoppingListArray)
+        // setObj(snapshot.val())
       } else {
         alert("Failed to fetch db snapshot")
       }
@@ -325,7 +337,7 @@ function App() {
     <>
       <div className="App">
         {/* top spacer */}
-        <div style={{height:"25px"}} />
+        <div style={{height:"70px"}} />
 
         {/* -----Add section----- */}
         {sectionSelect === "Add" &&
