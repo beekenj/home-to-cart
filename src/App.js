@@ -83,7 +83,8 @@ function App() {
     onValue(mealPlanInDB, function(snapshot) {
       if (snapshot.exists()) {
         const today = new Date().getDay()
-        console.log(weekdays.map(day => snapshot.val()[day]).slice(today, today+3))
+        console.log(weekdays.map(day => snapshot.val()[day]))
+        // console.log(snapshot.val())
         // console.log()
         // let mealListArray = Object.entries(snapshot.val())  
         // setList(shoppingListArray)
