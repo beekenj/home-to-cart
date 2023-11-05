@@ -52,11 +52,11 @@ function App() {
   // const sections = ["Cart", "Home", "Meals", "Add"]
   const sections = ["Cart", "Home", "Add"]
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  const today = new Date()
+  // const today = new Date()
 
   // console.log(today)
 
-  const weekStartingToday = Array(7).fill().map((_, idx) => today.getDay()+idx < 7 ? weekdays[today.getDay()+idx] : weekdays[today.getDay()+idx-7])
+  const weekStartingToday = nextDays(3)
   console.log(weekStartingToday)
 
   // state
@@ -88,7 +88,7 @@ function App() {
     })
     onValue(mealPlanInDB, function(snapshot) {
       if (snapshot.exists()) {
-        const today = new Date().getDay()
+        // const today = new Date().getDay()
         console.log(weekdays.map(day => snapshot.val()[day]))
         // console.log(snapshot.val())
         // console.log()
@@ -100,6 +100,15 @@ function App() {
       }
     })
   }, [])
+
+  function nextDays(n=7) {
+    if (n > 7 || n < 0) return null
+    const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    const today = new Date()
+    return Array(7).fill().map((_, idx) => 
+      today.getDay()+idx < 7 ? weekdays[today.getDay()+idx] : weekdays[today.getDay()+idx-7])
+      .slice(0,n)
+  }
 
   
   function addClick() {
