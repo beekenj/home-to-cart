@@ -21,6 +21,7 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "homeToCart")
 const mealPlanInDB = ref(database, "mealPlan")
+const mealsInDB = ref(database, "meals")
 
 
 let then = Date.now()
@@ -51,14 +52,13 @@ function App() {
   ]
   // const sections = ["Cart", "Home", "Meals", "Add"]
   const sections = ["Cart", "Home", "Add"]
-  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  // const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   // const today = new Date()
 
   // console.log(today)
 
-  const weekStartingToday = nextDays(3)
-  console.log(weekStartingToday)
-
+  
+  
   // state
   const [list, setList] = useState([])
   const [obj, setObj] = useState({})
@@ -73,33 +73,42 @@ function App() {
   const [count, setCount] = useState(1)
   const [viewColorSelector, setViewColorSelector] = useState(false)
   // console.log(list.filter(item => item[1].inCart))
+  const [mealObj, setMealObj] = useState({})
+  const [allMealsObj, setAllMealsObj] = useState({})
   const [mealList, setMealList] = useState([])
+  console.log(mealList)
 
   
   useEffect(() => {
     onValue(shoppingListInDB, function(snapshot) {
+    if (snapshot.exists()) {
+      let shoppingListArray = Object.entries(snapshot.val())
+      setList(shoppingListArray)
+      setObj(snapshot.val())
+    } else {
+      alert("Failed to fetch db snapshot")
+    }
+    })
+    onValue(mealPlanInDB, function(snapshot) {
       if (snapshot.exists()) {
-        let shoppingListArray = Object.entries(snapshot.val())
-        setList(shoppingListArray)
-        setObj(snapshot.val())
+        setMealObj(snapshot.val())
       } else {
         alert("Failed to fetch db snapshot")
       }
     })
-    onValue(mealPlanInDB, function(snapshot) {
+    onValue(mealsInDB, function(snapshot) {
       if (snapshot.exists()) {
-        // const today = new Date().getDay()
-        console.log(weekdays.map(day => snapshot.val()[day]))
-        // console.log(snapshot.val())
-        // console.log()
-        // let mealListArray = Object.entries(snapshot.val())  
-        // setList(shoppingListArray)
-        // setObj(snapshot.val())
+        setAllMealsObj(snapshot.val())
       } else {
         alert("Failed to fetch db snapshot")
       }
     })
   }, [])
+  
+  useEffect(() => {
+    const weekStartingToday = nextDays(3)
+    setMealList(weekStartingToday.map(day => allMealsObj[mealObj[day]]))
+  }, [mealObj, allMealsObj])
 
   function nextDays(n=7) {
     if (n > 7 || n < 0) return null
