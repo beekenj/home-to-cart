@@ -63,10 +63,17 @@ html, body {
 .btn-group {
     position: fixed;
     bottom: 0px;
-    /* max-width: 320px; */
     width: 100%;
     background-color: #4CAF50; /* Green */
     height: 55px;
+}
+
+.meal-group {
+    position: fixed;
+    top: 48px;
+    width: 100%;
+    background-color: #c6c6c6; /* Green */
+    height: 50px;
 }
 
 .btn-group .button {
