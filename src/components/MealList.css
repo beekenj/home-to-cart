@@ -1,0 +1,9 @@
+.meal-group {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    top: 48px;
+    width: 100%;
+    background-color: #c6c6c6; /* Green */
+    height: 50px;
+}

@@ -7,6 +7,7 @@ import CartItem from './components/CartItem';
 import NavButton from './components/NavButton';
 import ModButton from './components/ModButton';
 import ColorSelector from './components/ColorSelector';
+import MealList from './components/MealList';
 import './App.css';
 
 // put this stuff in component!
@@ -76,8 +77,7 @@ function App() {
   const [mealObj, setMealObj] = useState({})
   const [allMealsObj, setAllMealsObj] = useState({})
   const [mealList, setMealList] = useState([])
-  console.log(mealList)
-
+  const [dayMealList, setDayMealList] = useState([])
   
   useEffect(() => {
     onValue(shoppingListInDB, function(snapshot) {
@@ -109,6 +109,12 @@ function App() {
     const weekStartingToday = nextDays(3)
     setMealList(weekStartingToday.map(day => allMealsObj[mealObj[day]]))
   }, [mealObj, allMealsObj])
+
+  useEffect(() => {
+    if (mealList[0]) {
+      setDayMealList(mealList.map((elem, idx) => [nextDays()[idx], elem.name]))
+    }
+  }, [mealList])
 
   function nextDays(n=7) {
     if (n > 7 || n < 0) return null
@@ -513,9 +519,7 @@ function App() {
             />)}
         </div>}
       {!selectedItemId &&
-        <div className="meal-group">
-          
-        </div>}
+        <MealList dayMealList={dayMealList} />}
       {viewColorSelector && <ColorSelector clickHandle={colorClick} selectedItemColor={obj[selectedItemId].highlightColor} />}
     </>
   );
