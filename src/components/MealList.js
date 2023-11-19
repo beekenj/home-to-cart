@@ -1,9 +1,10 @@
 import './MealList.css'
+import Meal from './Meal'
 
 export default function MealList(props) {
     return (
         <div className="meal-group">
-          {props.dayMealList.map((elem, idx) => <div key={idx}>{<><div>{elem[0]}</div><div>{elem[1]}</div></>} </div>)}
+          {props.dayMealList.map((elem, idx) => <Meal key={idx} day={elem[0]} meal={elem[1]} />)}
         </div>
     )
 }

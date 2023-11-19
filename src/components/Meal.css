@@ -1,0 +1,15 @@
+.meal-elem {
+    width: 33%;
+    height: 55px;
+    padding: 5px;
+    /* border-style: solid; */
+}
+
+.day-elem {
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.name-elem {
+    padding-left: 10px;
+}

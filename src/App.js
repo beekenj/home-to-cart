@@ -111,9 +111,7 @@ function App() {
   }, [mealObj, allMealsObj])
 
   useEffect(() => {
-    if (mealList[0]) {
-      setDayMealList(mealList.map((elem, idx) => [nextDays()[idx], elem.name]))
-    }
+    setDayMealList(mealList.map((elem, idx) => [nextDays()[idx], elem ? elem.name: "None"]))
   }, [mealList])
 
   function nextDays(n=7) {
@@ -371,7 +369,7 @@ function App() {
     <>
       <div className="App">
         {/* top spacer */}
-        <div style={{height:"70px"}} />
+        <div style={{height:"95px"}} />
 
         {/* -----Add section----- */}
         {sectionSelect === "Add" &&
@@ -518,8 +516,7 @@ function App() {
               sectionSelect={sectionSelect}
             />)}
         </div>}
-      {!selectedItemId &&
-        <MealList dayMealList={dayMealList} />}
+      {!selectedItemId && <MealList dayMealList={dayMealList} />}
       {viewColorSelector && <ColorSelector clickHandle={colorClick} selectedItemColor={obj[selectedItemId].highlightColor} />}
     </>
   );

@@ -2,8 +2,8 @@
     display: flex;
     position: fixed;
     justify-content: space-between;
-    top: 48px;
+    top: 46px;
     width: 100%;
-    background-color: #c6c6c6; /* Green */
-    height: 50px;
+    background-color: #a3c7c3;
+    height: 70px;
 }
