@@ -1,8 +1,20 @@
-.meal-elem {
+.meal-container {
     width: 33%;
     height: 55px;
     padding: 5px;
+    align-items: center;
     /* border-style: solid; */
+}
+
+.meal-elem {
+    /* width: 33%; */
+    height: 55px;
+    padding: 7px;
+    /* border-style: solid; */
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: #7bc8c0;
+    /* text-align: center; */
 }
 
 .day-elem {
@@ -12,4 +24,5 @@
 
 .name-elem {
     padding-left: 10px;
+    /* text-align: center; */
 }
