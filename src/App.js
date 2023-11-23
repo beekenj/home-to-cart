@@ -5,7 +5,7 @@ import { getDatabase, ref, onValue, push, set, remove } from "firebase/database"
 import HomeItem from './components/HomeItem';
 import CartItem from './components/CartItem';
 import NavButton from './components/NavButton';
-import ModButton from './components/ModButton';
+import ModBar from './components/ModBar';
 import ColorSelector from './components/ColorSelector';
 import MealList from './components/MealList';
 import './App.css';
@@ -474,36 +474,17 @@ function App() {
 
       {/* Mod bar */}
       {selectedItemId &&
-        <div className="mod-group">
-          <ModButton 
-            section={"Edit"} 
-            handleClick={editItem} 
-            sectionSelect={sectionSelect}
-            selectedItemId={selectedItemId}
-          />
-          <select 
-            className='select'
-            id="homeLoc"
-            value={obj[selectedItemId].homeLoc}
-            onChange={handleChangeHomeLoc}
-            name="homeLoc"
-          >
-            <option value={obj[selectedItemId].homeLoc}>{obj[selectedItemId].homeLoc}</option>
-            {homeLocations.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
-          </select>
-          <ModButton 
-            section={"Color"} 
-            handleClick={() => setViewColorSelector(prev => !prev)} 
-            sectionSelect={sectionSelect}
-            selectedItemId={selectedItemId}
-          />
-          <ModButton 
-            section={"Delete"} 
-            handleClick={deleteItem} 
-            sectionSelect={sectionSelect}
-            selectedItemId={selectedItemId}
-          />
-        </div>}
+        <ModBar 
+          homeLocations = {homeLocations}
+          editItem = {editItem} 
+          sectionSelect = {sectionSelect} 
+          selectedItemId = {selectedItemId}
+          obj = {obj}
+          handleChangeHomeLoc = {handleChangeHomeLoc}
+          setViewColorSelector = {setViewColorSelector}
+          deleteItem = {deleteItem}
+        />
+      }
 
       {/* Navigation bar */}
       {!selectedItemId &&
@@ -516,7 +497,7 @@ function App() {
               sectionSelect={sectionSelect}
             />)}
         </div>}
-      {!selectedItemId && <MealList dayMealList={dayMealList} />}
+      <MealList dayMealList={dayMealList} />
       {viewColorSelector && <ColorSelector clickHandle={colorClick} selectedItemColor={obj[selectedItemId].highlightColor} />}
     </>
   );
