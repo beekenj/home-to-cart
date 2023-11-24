@@ -8,6 +8,7 @@ import NavButton from './components/NavButton';
 import ModBar from './components/ModBar';
 import ColorSelector from './components/ColorSelector';
 import MealList from './components/MealList';
+import HomeFilter from './components/HomeFilter';
 import './App.css';
 
 // put this stuff in component!
@@ -439,21 +440,12 @@ function App() {
             </button>}
         </div>
         <div>
-          {/* Home filter */}
-          {sectionSelect === "Home" &&
-            <select 
-              className='select-home'
-              id="homeLocSelect"
-              value={selectedLoc}
-              onChange={handleChangeHomeLocSelect}
-              name="homeLocSelect"
-            >
-              <option value="">Home</option>
-              {homeLocations.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
-              <option value="Unspecified">Unspecified</option>
-            </select>
-          }
-
+          <HomeFilter 
+            sectionSelect = {sectionSelect}
+            selectedLoc = {selectedLoc}
+            handleChangeHomeLocSelect = {handleChangeHomeLocSelect}
+            homeLocations = {homeLocations}
+          />
           {/* Store select */}
           {sectionSelect === "Cart" &&
             <>
