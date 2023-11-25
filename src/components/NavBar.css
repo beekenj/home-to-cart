@@ -1,0 +1,25 @@
+.btn-group {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: #4CAF50; /* Green */
+    height: 55px;
+}
+
+.btn-group .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    width: 33.333333333%;
+    /* width: 25%; */
+    height: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    /* float: left; */
+}
+
+  

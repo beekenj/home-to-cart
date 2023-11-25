@@ -13,15 +13,18 @@ const colors = [
     ]
 
 export default function ColorSelector(props) {
-    console.log(props.selectedItemColor)
     return (
-        <div className="color-selector">
-            {colors.map((color, idx) => <ColorPanel 
-                key={idx} 
-                color={color} 
-                clickHandle={props.clickHandle}
-                selectedItemColor={props.selectedItemColor}
-            />)}
+        <div>
+            {props.viewColorSelector && 
+                <div className="color-selector">
+                    {colors.map((color, idx) => <ColorPanel 
+                        key={idx} 
+                        color={color} 
+                        clickHandle={props.clickHandle}
+                        selectedItemColor={props.selectedItemColor.highlightColor}
+                    />)}
+                </div>
+            }
         </div>
     )
 }

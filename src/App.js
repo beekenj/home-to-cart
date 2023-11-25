@@ -2,33 +2,31 @@ import { useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app"
 import { getDatabase, ref, onValue, push, set, remove } from "firebase/database"
 
-import HomeItem from './components/HomeItem';
-import CartItem from './components/CartItem';
-import NavButton from './components/NavButton';
+// React Components
 import ModBar from './components/ModBar';
 import ColorSelector from './components/ColorSelector';
 import MealList from './components/MealList';
-import HomeFilter from './components/HomeFilter';
+import NavBar from './components/NavBar';
+import ListSections from './components/ListSections';
+import TopBar from './components/TopBar';
+
+// Stylesheet
 import './App.css';
 
-// put this stuff in component!
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+// Utility functions
+import { calcNewRunningAverage, searchEnter, nextDays } from './utilities'
 
+// firebase stuff
 const appSettings = {
   databaseURL: "https://realtime-database-aef6c-default-rtdb.firebaseio.com/"
 }
-
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "homeToCart")
 const mealPlanInDB = ref(database, "mealPlan")
 const mealsInDB = ref(database, "meals")
 
-
 let then = Date.now()
-
-// let count = 1
 
 function App() {
   const homeLocations = [
@@ -45,22 +43,14 @@ function App() {
     "Misc",
   ]
   const stores = [
-    // "Playground",
     "Gunberrel Kings",
     "Longmont Kings",
     "Boulder Safeway",
     "Boulder Kings",
     "Sam's Club",
   ]
-  // const sections = ["Cart", "Home", "Meals", "Add"]
   const sections = ["Cart", "Home", "Add"]
-  // const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  // const today = new Date()
 
-  // console.log(today)
-
-  
-  
   // state
   const [list, setList] = useState([])
   const [obj, setObj] = useState({})
@@ -71,15 +61,14 @@ function App() {
   const [selectedLoc, setSelectedLoc] = useState("")
   const [newSelectedLoc, setNewSelectedLoc] = useState("Unspecified")
   const [selectedStore, setSelectedStore] = useState("Gunberrel Kings")
-  // const [selectedStore, setSelectedStore] = useState("Playground")
   const [count, setCount] = useState(1)
   const [viewColorSelector, setViewColorSelector] = useState(false)
-  // console.log(list.filter(item => item[1].inCart))
   const [mealObj, setMealObj] = useState({})
   const [allMealsObj, setAllMealsObj] = useState({})
   const [mealList, setMealList] = useState([])
   const [dayMealList, setDayMealList] = useState([])
   
+  // useEffect hooks
   useEffect(() => {
     onValue(shoppingListInDB, function(snapshot) {
     if (snapshot.exists()) {
@@ -114,17 +103,12 @@ function App() {
   useEffect(() => {
     setDayMealList(mealList.map((elem, idx) => [nextDays()[idx], elem ? elem.name: "None"]))
   }, [mealList])
-
-  function nextDays(n=7) {
-    if (n > 7 || n < 0) return null
-    const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    const today = new Date()
-    return Array(7).fill().map((_, idx) => 
-      today.getDay()+idx < 7 ? weekdays[today.getDay()+idx] : weekdays[today.getDay()+idx-7])
-      .slice(0,n)
-  }
-
   
+  /* ---------------------
+
+    Utility functions
+
+     ---------------------*/ 
   function addClick() {
     let inputFieldEl = document.getElementById("input-field")
     let inputValue = inputFieldEl.value
@@ -171,13 +155,6 @@ function App() {
     })
     setCount(prev => prev+1)
   }
-  // console.log("count", count)
-
-  /* ---------------------
-
-    Utility functions
-
-     ---------------------*/ 
   
   // Check item change event
   function handleChangeHome(event) {
@@ -206,13 +183,6 @@ function App() {
   // change sections
   function sectionClick(section) {
     setSectionSelect(section)
-  }
-
-  // clear inputs on enter key
-  function searchEnter(event) {
-    if (event.key === "Enter") {
-      event.target.blur()
-    }
   }
 
   // toggle mod menu (dots)
@@ -292,33 +262,27 @@ function App() {
     setSelectedStore(value)
     event.target.blur()
   }
-  
-  // calculate running average for store location of items
-  function calcNewRunningAverage(newVal, oldAve, n) {
-    return ((oldAve*(n-1) + newVal)/n)
-  }
-
 
   // Initialize search conditions and location filter
   const condition = new RegExp(query.toLowerCase())
   const listSearch = list.filter(elem => condition.test(elem[1].name.toLowerCase()) || 
-                                         (elem[1].homeLoc && condition.test(elem[1].homeLoc.toLowerCase())))
+    (elem[1].homeLoc && condition.test(elem[1].homeLoc.toLowerCase())))
   const listFilter = listSearch.filter(elem => {
     if (!selectedLoc) return elem
-    else if (selectedLoc === "Unspecified") return elem[1].homeLoc === undefined || elem[1].homeLoc === "Unspecified"
+    else if (selectedLoc === "Unspecified") return elem[1].homeLoc === undefined || 
+      elem[1].homeLoc === "Unspecified"
     else return elem[1].homeLoc === selectedLoc
   })
 
   // Sort the filtered list
-  listFilter.sort((i1, i2) => (i1[1].timeStamp < i2[1].timeStamp) ? 1 : (i1[1].timeStamp > i2[1].timeStamp) ? -1 : 0)
+  listFilter.sort((i1, i2) => (i1[1].timeStamp < i2[1].timeStamp) ? 
+    1 : (i1[1].timeStamp > i2[1].timeStamp) ? -1 : 0)
 
   // Initialize add conditions
   const conditionAdd = new RegExp(addQuery.toLowerCase())
   const listFilterAdd = list.filter(elem => conditionAdd.test(elem[1].name.toLowerCase()))
 
   // sort cart list by running average
-
-  // useEffect(() => {
   list.sort((i1, i2) => {
     if (i1[1][selectedStore]) {
       if(i2[1][selectedStore]) {
@@ -333,172 +297,66 @@ function App() {
     }
   })
 
-  // }, [selectedStore])
-  
-  // Setup all section lists
-  const cartList = list.map(item => item[1].inCart && 
-    <CartItem 
-      key={item[0]} 
-      id={item[0]} 
-      item={item[1]}
-      handleChange={handleChangeCart}
-      menuClick={menuClick}
-      selected={selectedItemId===item[0]}
-    />)
-
-  const homeList = listFilter.map(item => 
-    <HomeItem 
-      key={item[0]} 
-      id={item[0]} 
-      item={item[1]}
-      handleChange={handleChangeHome}
-      menuClick={menuClick}
-      selected={selectedItemId===item[0]}
-    />)
-
-  const addList = listFilterAdd.map(item => 
-    <HomeItem 
-      key={item[0]} 
-      id={item[0]} 
-      item={item[1]}
-      handleChange={handleChangeHome}
-      menuClick={menuClick}
-      selected={selectedItemId===item[0]}
-    />)
-
   return (
     <>
-      <div className="App">
-        {/* top spacer */}
-        <div style={{height:"95px"}} />
-
-        {/* -----Add section----- */}
-        {sectionSelect === "Add" &&
-          <>
-            <input 
-              className="add-input" 
-              onChange={handleChangeAdd} 
-              type="text" 
-              id="input-field" 
-              placeholder="Name"
-              onKeyDown={searchEnter}
-            />
-            <select className="addSelect" onChange={handleChangeNewHomeLocation} value={newSelectedLoc}>
-              <option value="Unspecified">Home Location</option>
-              {homeLocations.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
-            </select>
-            <button className="addButton" id="add-button" onClick={addClick}>Add Item</button>
-            <div>
-              {addQuery && addList}
-            </div>
-          </>
-        }
-        {/* -----Cart section----- */}
-        {sectionSelect === "Cart" &&
-          <div>
-            {cartList}
-          </div>
-        }
-        {/* -----Home section----- */}
-        {sectionSelect === "Home" &&
-          <div>
-            {homeList}
-          </div>
-        }
-      </div>
-      {/* bottom spacer */}
-      <div style={{height:"85px"}} />
-
-      {/* Top bar */}
-      <div className="navbar-group">
-        <div className='navbar-search'>
-          {sectionSelect === "Cart" &&
-            <button className="button">
-              {list.filter(item => item[1].inCart).length}
-            </button>
-          }
-          {/* Search bar  */}
-          {sectionSelect === "Home" &&
-            <input 
-              className="searchbar" 
-              type="text" 
-              id="search-field" 
-              placeholder="Search" 
-              onKeyDown={searchEnter}
-              onChange={handleChangeSearch} 
-              value={query}
-            /> 
-          }
-
-          {/* Query cancel */}
-          {sectionSelect === "Home" && query && 
-            <button 
-              className="button" 
-              onClick={() => setQuery("")}
-            >
-              <FontAwesomeIcon icon={faTimesCircle} />
-            </button>}
-        </div>
-        <div>
-          <HomeFilter 
-            sectionSelect = {sectionSelect}
-            selectedLoc = {selectedLoc}
-            handleChangeHomeLocSelect = {handleChangeHomeLocSelect}
-            homeLocations = {homeLocations}
-          />
-          {/* Store select */}
-          {sectionSelect === "Cart" &&
-            <>
-            
-            <select 
-              className='select-store'
-              id="homeLocSelect"
-              value={selectedStore}
-              onChange={handleChangeStoreSelect}
-              name="storeLocSelect"
-              >
-              {stores.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
-            </select>
-            </>
-          }
-        </div>
-      </div>
-
-      {/* Mod bar */}
-      {selectedItemId &&
-        <ModBar 
-          homeLocations = {homeLocations}
-          editItem = {editItem} 
-          sectionSelect = {sectionSelect} 
-          selectedItemId = {selectedItemId}
-          obj = {obj}
-          handleChangeHomeLoc = {handleChangeHomeLoc}
-          setViewColorSelector = {setViewColorSelector}
-          deleteItem = {deleteItem}
-        />
-      }
-
-      {/* Navigation bar */}
-      {!selectedItemId &&
-        <div className="btn-group">
-          {sections.map((section, idx) => 
-            <NavButton 
-              key={idx} 
-              section={section} 
-              handleClick={sectionClick} 
-              sectionSelect={sectionSelect}
-            />)}
-        </div>}
+      <ListSections
+        sectionSelect = {sectionSelect}
+        handleChangeAdd = {handleChangeAdd}
+        searchEnter = {searchEnter}
+        handleChangeNewHomeLocation = {handleChangeNewHomeLocation}
+        newSelectedLoc = {newSelectedLoc}
+        homeLocations = {homeLocations}
+        addClick = {addClick}
+        addQuery = {addQuery}
+        listFilterAdd = {listFilterAdd}
+        handleChangeHome = {handleChangeHome}
+        menuClick = {menuClick}
+        selectedItemId = {selectedItemId}
+        list = {list}
+        handleChangeCart = {handleChangeCart}
+        listFilter = {listFilter}
+      />
+      <TopBar
+        handleChangeSearch = {handleChangeSearch}
+        query = {query}
+        sectionSelect = {sectionSelect}
+        setQuery = {setQuery}
+        list = {list}
+        searchEnter = {searchEnter}
+        selectedLoc = {selectedLoc}
+        handleChangeHomeLocSelect = {handleChangeHomeLocSelect}
+        homeLocations = {homeLocations}
+        selectedStore = {selectedStore}
+        handleChangeStoreSelect = {handleChangeStoreSelect}
+        stores = {stores}
+      />
+      <ModBar 
+        homeLocations = {homeLocations}
+        editItem = {editItem} 
+        sectionSelect = {sectionSelect} 
+        selectedItemId = {selectedItemId}
+        obj = {obj}
+        handleChangeHomeLoc = {handleChangeHomeLoc}
+        setViewColorSelector = {setViewColorSelector}
+        deleteItem = {deleteItem}
+      />
+      <NavBar
+        selectedItemId = {selectedItemId}
+        sections = {sections}
+        sectionClick = {sectionClick}
+        sectionSelect = {sectionSelect}
+      />
       <MealList dayMealList={dayMealList} />
-      {viewColorSelector && <ColorSelector clickHandle={colorClick} selectedItemColor={obj[selectedItemId].highlightColor} />}
+      <ColorSelector 
+        clickHandle={colorClick} 
+        selectedItemColor={obj[selectedItemId]} 
+        viewColorSelector = {viewColorSelector}
+      />
     </>
-  );
+  )
 }
 
 export default App;
-
-
-
 
 // the off click thingy...
 // https://codeburst.io/the-off-click-7cbc08bb3df51

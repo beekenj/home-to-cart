@@ -1,0 +1,30 @@
+.topbar-group {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    top: 0px;
+    /* max-width: 320px; */
+    width: 100%;
+    background-color: #411342; /* Purple */
+    height: 47px;
+}
+
+.topbar-group .button {
+    background-color: #411342; /* Purple */
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    /* width: 33.3333333%; */
+    height: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    /* float: left; */
+    text-align: left;
+  }
+  
+.topbar-group .button:hover {
+    background-color: #631464; /* Purple */
+}

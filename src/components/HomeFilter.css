@@ -1,0 +1,17 @@
+.topbar-group .select-home {
+  background-color: #411342; /* Purple */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  height: 100%;
+  width: 120px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  /* background: transparent; */
+  -webkit-appearance: none;
+  appearance: none;
+}
