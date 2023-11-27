@@ -14,7 +14,7 @@ import TopBar from './components/TopBar';
 import './App.css';
 
 // Utility functions
-import { calcNewRunningAverage, searchEnter, nextDays } from './utilities'
+import { calcNewRunningAverage, searchEnter, nextDays } from './js/utilities'
 
 // firebase stuff
 const appSettings = {
@@ -330,6 +330,9 @@ function App() {
         handleChangeStoreSelect = {handleChangeStoreSelect}
         stores = {stores}
       />
+      <MealList 
+        dayMealList={dayMealList} 
+      />
       <ModBar 
         homeLocations = {homeLocations}
         editItem = {editItem} 
@@ -346,7 +349,6 @@ function App() {
         sectionClick = {sectionClick}
         sectionSelect = {sectionSelect}
       />
-      <MealList dayMealList={dayMealList} />
       <ColorSelector 
         clickHandle={colorClick} 
         selectedItemColor={obj[selectedItemId]} 
