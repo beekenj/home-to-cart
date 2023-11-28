@@ -297,6 +297,13 @@ function App() {
     }
   })
 
+  
+  function update(store) {
+    list.forEach((elem, idx) => elem[1][store] = {...elem[1][store], "number":idx})
+  }
+  
+  update(selectedStore)
+  console.log(list.map((elem, idx)=>elem[1][selectedStore]))
   return (
     <>
       <ListSections
