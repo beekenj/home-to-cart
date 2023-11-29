@@ -298,12 +298,18 @@ function App() {
   })
 
   
-  function update(store) {
-    list.forEach((elem, idx) => elem[1][store] = {...elem[1][store], "number":idx})
-  }
+  // function update(store) {
+  //   list.forEach((elem, idx) => {
+  //     // console.log(elem[0])
+  //     elem[1][store] = {...elem[1][store], "sortNum" : idx}
+  //     set(ref(database, "homeToCart/" + elem[0]), {
+  //       ...elem[1],
+  //     })
+  // })
+  // }
   
-  update(selectedStore)
-  console.log(list.map((elem, idx)=>elem[1][selectedStore]))
+  // update(selectedStore)
+  // console.log(list.map((elem, idx)=>elem[1][selectedStore]))
   return (
     <>
       <ListSections
