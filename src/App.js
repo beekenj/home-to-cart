@@ -135,7 +135,7 @@ function App() {
         then = Date.now()
       }
 
-      if (!item[selectedStore]) {
+      if (!item[selectedStore] || !item[selectedStore].numChecks) {
         storeUpdate = {
           numChecks: 1, 
           ave: count
