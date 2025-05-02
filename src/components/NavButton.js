@@ -1,6 +1,6 @@
 import './NavButton.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faHome, faPlus, faCutlery } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faHome, faPlus, faCutlery, faIdCard } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavButton(props) {
     const iconObj = {
@@ -8,6 +8,7 @@ export default function NavButton(props) {
         "Home":faHome,
         "Meals":faCutlery,
         "Add":faPlus,
+        "Sams":faIdCard,
     }
     return (
         <button

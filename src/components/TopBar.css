@@ -28,3 +28,109 @@
 .topbar-group .button:hover {
     background-color: #631464; /* Purple */
 }
+
+  /* The container */
+  .topbar-group .clickArea {
+    display: block;
+    position: relative;
+    /* padding-left: 15px; */
+    /* margin-bottom: 5px; */
+    margin: 10px 10px 10px 10px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #2196F3;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 20px;
+  }
+  
+  .topbar-group .clickArea::selection {
+    color: none;
+    background: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .topbar-group .clickArea input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .topbar-group .clickArea * {
+    /* -webkit-tap-highlight-color: transparent; */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-user-select:none; /* firefox */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE*/
+    user-select: none; /* Standard syntax */
+  }
+  
+  /* Create a custom checkbox */
+  .topbar-group .checkmark {
+    position: absolute;
+    top: -1px;
+    left: 0px;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    outline-width: 0;
+  }
+  
+  .topbar-group .checkmark * {
+    /* -webkit-tap-highlight-color: transparent; */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-user-select:none; /* firefox */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE*/
+    user-select: none; /* Standard syntax */
+  }
+  
+  .topbar-group .checkmark:focus {
+    outline-width: 0;
+  }
+  
+  .topbar-group .checkmark::selection {
+    color: none;
+    background: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .topbar-group .clickArea input:checked ~ .checkmark {
+    background-color: #b53985;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .topbar-group .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .topbar-group .clickArea input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .topbar-group .clickArea .checkmark:after {
+    left: 5.5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }

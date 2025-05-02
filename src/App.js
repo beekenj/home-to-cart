@@ -43,8 +43,8 @@ function App() {
     "Misc",
   ]
   const stores = [
-    "Gunberrel Kings",
     "Longmont Kings",
+    "Gunberrel Kings",
     "Boulder Safeway",
     "Boulder Kings",
     "Sam's Club",
@@ -60,7 +60,7 @@ function App() {
   const [selectedItemId, setselectedItemId] = useState()
   const [selectedLoc, setSelectedLoc] = useState("")
   const [newSelectedLoc, setNewSelectedLoc] = useState("Unspecified")
-  const [selectedStore, setSelectedStore] = useState("Gunberrel Kings")
+  const [selectedStore, setSelectedStore] = useState("Longmont Kings")
   const [count, setCount] = useState(1)
   const [viewColorSelector, setViewColorSelector] = useState(false)
   const [mealObj, setMealObj] = useState({})
