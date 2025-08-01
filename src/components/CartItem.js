@@ -1,11 +1,12 @@
 import "./CartItem.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisV, faIdCard } from '@fortawesome/free-solid-svg-icons'
 
 export default function CartItem(props) {
     const MAXLENGTH = 25
     const itemName = props.item["name"]
     const itemInCart = props.item["inCart"]
+    const samsItem = props.item.sams
     const style = {
         background: 
                 (props.selected && "lightgray") || 
@@ -29,6 +30,14 @@ export default function CartItem(props) {
                     itemName :
                     itemName.slice(0,MAXLENGTH) + "..."
                 }
+            </div>
+            <div className="samsIcon">
+                <FontAwesomeIcon icon={faIdCard} 
+                    color = {(samsItem && "gray") || 
+                            (props.selected && "lightgray") || 
+                            (!props.item.highlightColor && "white") ||
+                            (props.item.highlightColor)} 
+                />
             </div>
             <div className="menuArea" onClick={() => props.menuClick(props.id)}>
                 <FontAwesomeIcon icon={faEllipsisV} />

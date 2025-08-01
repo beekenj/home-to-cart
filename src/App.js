@@ -67,6 +67,7 @@ function App() {
   const [allMealsObj, setAllMealsObj] = useState({})
   const [mealList, setMealList] = useState([])
   const [dayMealList, setDayMealList] = useState([])
+  const [samsFilter, setSamsFilter] = useState(0)
   
   // useEffect hooks
   useEffect(() => {
@@ -240,6 +241,28 @@ function App() {
     setselectedItemId()
   }
 
+  // Sam's club item toggle
+  function handleSamsToggle() {
+    const item = obj[selectedItemId]
+    const checked = item.sams
+    set(ref(database, "homeToCart/" + selectedItemId), {
+      ...item,
+      "sams" : checked ? false : true,
+    })
+    setselectedItemId()
+  }
+
+  // Sam's club filter toggle
+  function handleSamsFilter() {
+    // console.log("sam's filter")
+    setSamsFilter(prev => {
+      if (prev === 0) return 1
+      else if (prev === 1) return 2
+      else return 0
+    })
+  }
+  // console.log(samsFilter)
+
   /* ----------------------------------------------------------*/
 
   // Select home location filter
@@ -263,25 +286,6 @@ function App() {
     event.target.blur()
   }
 
-  // Initialize search conditions and location filter
-  const condition = new RegExp(query.toLowerCase())
-  const listSearch = list.filter(elem => condition.test(elem[1].name.toLowerCase()) || 
-    (elem[1].homeLoc && condition.test(elem[1].homeLoc.toLowerCase())))
-  const listFilter = listSearch.filter(elem => {
-    if (!selectedLoc) return elem
-    else if (selectedLoc === "Unspecified") return elem[1].homeLoc === undefined || 
-      elem[1].homeLoc === "Unspecified"
-    else return elem[1].homeLoc === selectedLoc
-  })
-
-  // Sort the filtered list
-  listFilter.sort((i1, i2) => (i1[1].timeStamp < i2[1].timeStamp) ? 
-    1 : (i1[1].timeStamp > i2[1].timeStamp) ? -1 : 0)
-
-  // Initialize add conditions
-  const conditionAdd = new RegExp(addQuery.toLowerCase())
-  const listFilterAdd = list.filter(elem => conditionAdd.test(elem[1].name.toLowerCase()))
-
   // sort cart list by running average
   list.sort((i1, i2) => {
     if (i1[1][selectedStore]) {
@@ -297,19 +301,38 @@ function App() {
     }
   })
 
+  // Initialize add conditions
+  const conditionAdd = new RegExp(addQuery.toLowerCase())
+  const listFilterAdd = list.filter(elem => conditionAdd.test(elem[1].name.toLowerCase()))
+
+  // Initialize search conditions and search filter
+  const condition = new RegExp(query.toLowerCase())
+  const listSearch = list.filter(elem => condition.test(elem[1].name.toLowerCase()) || 
+  (elem[1].homeLoc && condition.test(elem[1].homeLoc.toLowerCase())))
+
+  // Location + Sams filter for HOME LIST
+  const listFilter = listSearch.filter(elem => {
+    if (!selectedLoc) return elem
+    else if (selectedLoc === "Unspecified") return elem[1].homeLoc === undefined || 
+    elem[1].homeLoc === "Unspecified"
+    else return elem[1].homeLoc === selectedLoc
+  }).filter(elem => {
+    if (samsFilter === 0) return elem
+    else if (samsFilter === 1) return elem[1].sams
+    else return !elem[1].sams
+  })
+
+  // Sams filter for CART LIST
+  const cartFilter = list.filter(elem => {
+    if (samsFilter === 0) return elem
+    else if (samsFilter === 1) return elem[1].sams
+    else return !elem[1].sams
+  })
   
-  // function update(store) {
-  //   list.forEach((elem, idx) => {
-  //     // console.log(elem[0])
-  //     elem[1][store] = {...elem[1][store], "sortNum" : idx}
-  //     set(ref(database, "homeToCart/" + elem[0]), {
-  //       ...elem[1],
-  //     })
-  // })
-  // }
-  
-  // update(selectedStore)
-  // console.log(list.map((elem, idx)=>elem[1][selectedStore]))
+  // Sort the filtered list
+  listFilter.sort((i1, i2) => (i1[1].timeStamp < i2[1].timeStamp) ? 
+    1 : (i1[1].timeStamp > i2[1].timeStamp) ? -1 : 0)
+
   return (
     <>
       <ListSections
@@ -325,7 +348,7 @@ function App() {
         handleChangeHome = {handleChangeHome}
         menuClick = {menuClick}
         selectedItemId = {selectedItemId}
-        list = {list}
+        list = {cartFilter}
         handleChangeCart = {handleChangeCart}
         listFilter = {listFilter}
       />
@@ -342,6 +365,8 @@ function App() {
         selectedStore = {selectedStore}
         handleChangeStoreSelect = {handleChangeStoreSelect}
         stores = {stores}
+        samsToggle = {handleSamsFilter}
+        samsState = {samsFilter}
       />
       <MealList 
         dayMealList={dayMealList} 
@@ -355,6 +380,7 @@ function App() {
         handleChangeHomeLoc = {handleChangeHomeLoc}
         setViewColorSelector = {setViewColorSelector}
         deleteItem = {deleteItem}
+        samsToggle = {handleSamsToggle}
       />
       <NavBar
         selectedItemId = {selectedItemId}

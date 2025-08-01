@@ -10,11 +10,18 @@ export default function NavButton(props) {
         "Add":faPlus,
         "Sams":faIdCard,
     }
+    const style = {
+        color: 
+        (props.samsState === 0 && "white") || 
+        (props.samsState === 1 && "#a2f3fc") ||
+        (props.samsState === 2 && "red") ||
+        (props.section === props.sectionSelect ? "#a2f3fc" : "white")
+        }
     return (
         <button
             className="button"
             onClick={() => props.handleClick(props.section)}
-            style={{color:props.section === props.sectionSelect ? '#a2f3fc' : 'white'}}
+            style={style}
         >
             <FontAwesomeIcon icon={iconObj[props.section]} />
         </button>

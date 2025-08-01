@@ -21,6 +21,36 @@ export default function ListSections ({
     handleChangeCart,
     listFilter,
 }) {
+    // split list into sections
+    const colors = [
+        "#c5fcd2", 
+        "#ffe49c",
+        "#ffbafe", 
+        "#acfcfc", 
+        "#e5cafa",
+        "#78a4eb", 
+        "#fafaa7", 
+        "#ffffff", 
+    ]
+
+    // const testList = list.filter(elem => elem[1].highlightColor === "#acfcfc")
+    const unassigned = list.filter(elem => !elem[1].highlightColor)
+
+    const segmentList = colors.map(color => list.filter(elem => elem[1].highlightColor === color))
+    const segmentCart = segmentList.map((elem, idx) => 
+            <CartSection
+                key = {idx}
+                list = {elem}
+                handleChangeCart = {handleChangeCart}
+                menuClick = {menuClick}
+                selectedItemId = {selectedItemId}
+                sectionSelect = {sectionSelect}
+            />
+        )
+
+    // console.log(segmentList[0])
+
+
     return (
         <div className="list-sections">
             {/* top spacer */}
@@ -39,8 +69,9 @@ export default function ListSections ({
                 menuClick = {menuClick}
                 selectedItemId = {selectedItemId}
             />
+            {segmentCart}
             <CartSection
-                list = {list}
+                list = {unassigned}
                 handleChangeCart = {handleChangeCart}
                 menuClick = {menuClick}
                 selectedItemId = {selectedItemId}

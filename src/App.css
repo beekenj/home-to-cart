@@ -20,8 +20,8 @@ html, body {
     background-color: #777777; /* Gray */
     border: none;
     color: white;
-    padding: 15px 30px;
-    width: 20%;
+    /* padding: 15px 30px; */
+    width: 18%;
     height: 100%;
     text-align: center;
     text-decoration: none;
@@ -34,8 +34,8 @@ html, body {
     background-color: #777777; /* Gray */
     border: none;
     color: white;
-    padding: 15px 5px;
-    width: 40%;
+    /* padding: 15px 5px; */
+    width: 28%;
     height: 100%;
     text-align: center;
     text-decoration: none;

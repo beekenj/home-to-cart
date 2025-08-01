@@ -18,7 +18,10 @@ export default function TopBar ({
     selectedStore,
     handleChangeStoreSelect,
     stores,
+    samsToggle,
+    samsState,
 }) {
+    // console.log(query)
     return (
         <div className="topbar-group">
             <SearchBar
@@ -29,18 +32,13 @@ export default function TopBar ({
                 list = {list}
                 searchEnter = {searchEnter}
             />
-            {/* <label className="clickArea">
-                <input 
-                    type="checkbox" 
-                />
-                <span className="checkmark" />
-            </label> */}
-            {sectionSelect === "Home" &&
+
+            {/* Sam's club toggle */}
+            {!query &&
             <NavButton 
-                // key={idx} 
                 section={"Sams"} 
-                handleClick={() => console.log("sams")} 
-                // sectionSelect={sectionSelect}
+                handleClick={samsToggle}
+                samsState={samsState}
             />
             }
             <HomeFilter 

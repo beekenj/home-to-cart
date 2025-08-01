@@ -10,6 +10,7 @@ export default function ModBar({
     handleChangeHomeLoc,
     setViewColorSelector,
     deleteItem,
+    samsToggle,
 }) {
     return (
       <div>
@@ -18,7 +19,7 @@ export default function ModBar({
             <ModButton 
               section={"Edit"} 
               handleClick={editItem} 
-              sectionSelect={sectionSelect}
+              // sectionSelect={sectionSelect}
               selectedItemId={selectedItemId}
             />
             <select 
@@ -32,15 +33,22 @@ export default function ModBar({
               {homeLocations.map((loc, idx) => <option key={idx} value={loc}>{loc}</option>)}
             </select>
             <ModButton 
+              section={"Sams"} 
+              handleClick={samsToggle}
+              highlight={obj[selectedItemId].sams}
+              // sectionSelect={sectionSelect}
+              selectedItemId={selectedItemId}
+            />
+            <ModButton 
               section={"Color"} 
               handleClick={() => setViewColorSelector(prev => !prev)} 
-              sectionSelect={sectionSelect}
+              // sectionSelect={sectionSelect}
               selectedItemId={selectedItemId}
             />
             <ModButton 
               section={"Delete"} 
               handleClick={deleteItem} 
-              sectionSelect={sectionSelect}
+              // sectionSelect={sectionSelect}
               selectedItemId={selectedItemId}
             />
           </div>
