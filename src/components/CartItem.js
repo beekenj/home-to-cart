@@ -11,7 +11,8 @@ export default function CartItem(props) {
         background: 
                 (props.selected && "lightgray") || 
                 (!props.item.highlightColor && "white") ||
-                (props.item.highlightColor)
+                // (props.item.highlightColor)
+                "white"
     }
     return (
         <div className="container" style={style} onDragStart={() => console.log("hi")} draggable>
@@ -36,7 +37,9 @@ export default function CartItem(props) {
                     color = {(samsItem && "gray") || 
                             (props.selected && "lightgray") || 
                             (!props.item.highlightColor && "white") ||
-                            (props.item.highlightColor)} 
+                            // (props.item.highlightColor)
+                            "white"
+                        } 
                 />
             </div>
             <div className="menuArea" onClick={() => props.menuClick(props.id)}>
