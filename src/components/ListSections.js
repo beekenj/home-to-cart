@@ -3,7 +3,7 @@ import "./ListSections.css"
 import AddSection from "./AddSection"
 import CartSection from "./CartSection"
 import HomeSection from "./HomeSection"
-import { width } from "@fortawesome/free-solid-svg-icons/fa0"
+// import { width } from "@fortawesome/free-solid-svg-icons/fa0"
 
 export default function ListSections ({
     sectionSelect,
@@ -33,34 +33,26 @@ export default function ListSections ({
         "#fafaa7", 
         "#ffffff", 
     ]
-    const sectionNames = [
-        "Produce", 
-        "Meat",
-        "Bread/Pharm", 
-        "Cold/Can", 
-        "Cook/Clean",
-        "Frozen", 
-        "Dairy/Snacks", 
-        "Unlisted", 
-    ]
+    // const sectionNames = [
+    //     "Produce", 
+    //     "Meat",
+    //     "Bread/Pharm", 
+    //     "Cold/Can", 
+    //     "Cook/Clean",
+    //     "Frozen", 
+    //     "Dairy/Snacks", 
+    //     "Unlisted", 
+    // ]
 
-    // console.log(list)
-    
-    // const testList = list.filter(elem => elem[1].highlightColor === "#acfcfc")
     const unassigned = list.filter(elem => !elem[1].highlightColor)
-    // console.log(list)
     
     const segmentList = colors.map(color => list.filter(elem => elem[1].highlightColor === color))
-    // const segmentLengths = list.filter(elem => )
-    // console.log(segmentList)
     const segmentCart = segmentList.map((elem, idx) => 
             <div
                 key = {idx}
             >
-            {/* {console.log("e", elem)} */}
-            {elem.filter(item => item[1].inCart).length ? 
-            // <table><tr><td>{sectionNames[idx]}</td></tr>
-            <table style={{width:"100%"}}>
+            {elem.filter(item => item[1].inCart).length && sectionSelect === "Cart" ? 
+            <table style={{width:"100%", padding:"0px, 0px"}}>
                 <tbody>
                     <tr>
                         <td style={{backgroundColor: colors[idx], width: "5px"}}></td>
@@ -71,18 +63,14 @@ export default function ListSections ({
                                 menuClick = {menuClick}
                                 selectedItemId = {selectedItemId}
                                 sectionSelect = {sectionSelect}
-                                />
+                            />
                         </td>
                     </tr>
                 </tbody>
             </table>
             : <></>}
-            {/* {elem.filter(item => item[1].inCart).length ? <><table><tr>{sectionNames[idx]}</tr><tr></> : <></>} */}
             </div>
         )
-
-    // console.log(segmentList[0])
-
 
     return (
         <div className="list-sections">
