@@ -12,6 +12,8 @@ export default function ModBar({
     deleteItem,
     samsToggle,
 }) {
+    // console.log(obj[selectedItemId].highlightColor)
+    // console.log(obj)
     return (
       <div>
         {selectedItemId &&
@@ -42,6 +44,7 @@ export default function ModBar({
             <ModButton 
               section={"Color"} 
               handleClick={() => setViewColorSelector(prev => !prev)} 
+              highlightColor={obj[selectedItemId].highlightColor}
               // sectionSelect={sectionSelect}
               selectedItemId={selectedItemId}
             />

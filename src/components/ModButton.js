@@ -10,12 +10,17 @@ export default function NavButton(props) {
         "Color":faEyeDropper,
         "Sams":faIdCard,
     }
+    const color = () => {
+        if (props.highlight) return '#a2f3fc'
+        else if (props.highlightColor) return props.highlightColor
+        else return 'white'
+    }
     return (
         <button
             className="button"
             onClick={() => props.handleClick(props.selectedItemId)}
             // style={{color:props.section === props.sectionSelect ? '#a2f3fc' : 'white'}}
-            style={{color:props.highlight ? '#a2f3fc' : 'white'}}
+            style={{color:color()}}
         >
             <FontAwesomeIcon icon={iconObj[props.section]} />
         </button>

@@ -10,8 +10,7 @@ export default function HomeItem(props) {
     const style = {
         background: 
                 (props.selected && "lightgray") || 
-                (!props.item.highlightColor && "white") ||
-                (props.item.highlightColor)
+                (!props.item.highlightColor && "white")
     }
     
     // console.log(typeof(itemInCart))
@@ -37,8 +36,7 @@ export default function HomeItem(props) {
                 <FontAwesomeIcon icon={faIdCard} 
                     color = {(samsItem && "gray") || 
                             (props.selected && "lightgray") || 
-                            (!props.item.highlightColor && "white") ||
-                            (props.item.highlightColor)} 
+                            "white"} 
                 />
             </div>
             <div className="menuArea" onClick={() => props.menuClick(props.id)}>
