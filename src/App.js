@@ -167,6 +167,7 @@ function App() {
     })
     setQuery("")
     setAddQuery("")
+    event.target.blur()
   }
 
   // Search bar entry

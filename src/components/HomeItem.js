@@ -9,8 +9,7 @@ export default function HomeItem(props) {
     const samsItem = props.item.sams
     const style = {
         background: 
-                (props.selected && "lightgray") || 
-                (!props.item.highlightColor && "white")
+                (props.selected && "lightgray") || "white"
     }
     
     // console.log(typeof(itemInCart))
